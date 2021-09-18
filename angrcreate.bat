@@ -1,1 +1,0 @@
-docker run --rm -it -u angr -v /c/Users/mount/kali/root/re:/home/files angr/angr bash
