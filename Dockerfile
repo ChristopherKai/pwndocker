@@ -1,4 +1,4 @@
-FROM skysider:pwndocker
+FROM skysider/pwndocker
 
 
 WORKDIR /opt
