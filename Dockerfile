@@ -13,6 +13,8 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     # config pwndbg 
     locale-gen en_US.UTF-8 && \
-    printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit
+    printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit && \
+    printf "\nexport LC_ALL=en_US.UTF-8\nexport PYTHONIOENCODING=UTF-8" >> /etc/profile 
+
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
