@@ -10,6 +10,9 @@ RUN  apt-get update && apt-get install -y qemu-user  \
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
     echo "root:root" | chpasswd && chmod +x /opt/entrypoint.sh &&\
     ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key && \
-    ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+    ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key && \
+    # config pwndbg 
+    locale-gen en_US.UTF-8 && \
+    && printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]

@@ -1,1 +1,1 @@
-docker run --rm -it -p55555:22 -u root -v /c/Users/mount/kali/root/re:/home/files registry.cn-hangzhou.aliyuncs.com/kais_2020/pwndocker bash
+docker run --rm -it -p55555:22 -p23946:23946 -u root -v /c/Users/mount/kali/root/re:/home/files registry.cn-hangzhou.aliyuncs.com/kais_2020/pwndocker bash
