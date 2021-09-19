@@ -5,6 +5,7 @@ WORKDIR /opt
 RUN  apt-get update && apt-get install -y qemu-user  \
     qemu-user-static\
     # for aarch64 with debug symbol
+    binutils-aarch64-linux-gnu\
     binutils-aarch64-linux-gnu-dbg \
     # for arm
     binutils-arm-linux-gnueabi-dbg binutils-arm-linux-gnueabi binutils-common=2.34-6ubuntu1\
