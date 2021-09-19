@@ -24,7 +24,7 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     # coolpwn
     git clone https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python3 setup.py install && cd -\
     # mytool
-    git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate
+    # git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate
 
 
 EXPOSE 22
