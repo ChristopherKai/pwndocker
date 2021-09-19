@@ -4,7 +4,10 @@ COPY entrypoint.sh /opt
 WORKDIR /opt
 RUN  apt-get update && apt-get install -y qemu-user  \
     qemu-user-static\
-    binutils-aarch64-linux-gnu \
+    # for aarch64 with debug symbol
+    binutils-aarch64-linux-gnu-dbg \
+    # for arm
+    binutils-arm-linux-gnueabi-dbg binutils-arm-linux-gnueabi binutils-common=2.34-6ubuntu1\
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
@@ -16,7 +19,9 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit && \
     printf "\nexport LC_ALL=en_US.UTF-8\nexport PYTHONIOENCODING=UTF-8" >> /etc/profile &&\
     # coolpwn
-    git clone https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python setup.py install
+    git clone https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python setup.py install &&\
+    # mytool
+    git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate
 
 
 EXPOSE 22
