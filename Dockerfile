@@ -26,7 +26,7 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     # mytool
     git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate &&\
     pip3 uninstall pwntools &&\
-    pip3  --no-cache-dir  install formatStringExploiter pwntools=pwntools==4.0.1
+    pip3  --no-cache-dir  install formatStringExploiter pwntools==4.0.1
 
 # web misc tools
 RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && make install && cd -\
