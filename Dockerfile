@@ -22,10 +22,17 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit && \
     printf "\nexport LC_ALL=en_US.UTF-8\nexport PYTHONIOENCODING=UTF-8" >> /etc/profile &&\
     # coolpwn
-    git clone https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python3 setup.py install && cd -
+    git clone https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python3 setup.py install && cd - &&\
     # mytool
-    # git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate
+    git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate &&\
+    pip3 uninstall pwntools &&\
+    pip3  --no-cache-dir  install formatStringExploiter pwntools=pwntools==4.0.1
 
+# web misc tools
+RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && make install && cd -\
+    && git clone https://github.com/brendan-rius/c-jwt-cracker.git && cd c-jwt-cracker && make \
+    && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit 
+    
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
