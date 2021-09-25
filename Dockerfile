@@ -15,6 +15,7 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     # for arm
     binutils-arm-linux-gnueabi-dbg \
     binutils-arm-linux-gnueabi\
+    gcc-arm-linux-gnueabi\
     # mips 32 little ending
     gcc-mipsel-linux-gnu \
     g++-mipsel-linux-gnu \
@@ -22,11 +23,13 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     gcc-mips-linux-gnu \ 
     g++-mips-linux-gnu \
     # mips 64 bit little ending
-    # gcc-mips64el-linux-gnuabi64\
-    # g++-mips64el-linux-gnuabi64 \
+    gcc-mips64el-linux-gnuabi64\
+    g++-mips64el-linux-gnuabi64 \
     # mips 64 bit big ending
-    # gcc-mips64-linux-gnuabi64\
-    # g++-mips64-linux-gnuabi64\ 
+    gcc-mips64-linux-gnuabi64\
+    g++-mips64-linux-gnuabi64\ 
+    # tools
+    squashfs-tools\
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
@@ -51,7 +54,6 @@ RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && mak
     && git clone https://github.com/brendan-rius/c-jwt-cracker.git && cd c-jwt-cracker && make \
     && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
     && git clone https://github.com/ReFirmLabs/binwalk.git && cd binwalk && python3 setup.py install \
-    && apt-get install squashfs-tools -y    \
     && 	curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 
 EXPOSE 22
