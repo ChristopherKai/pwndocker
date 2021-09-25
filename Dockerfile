@@ -22,11 +22,11 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     gcc-mips-linux-gnu \ 
     g++-mips-linux-gnu \
     # mips 64 bit little ending
-    gcc-mips64el-linux-gnuabi64\
-    g++-mips64el-linux-gnuabi64 \
+    # gcc-mips64el-linux-gnuabi64\
+    # g++-mips64el-linux-gnuabi64 \
     # mips 64 bit big ending
-    gcc-mips64-linux-gnuabi64\
-    g++-mips64-linux-gnuabi64\ 
+    # gcc-mips64-linux-gnuabi64\
+    # g++-mips64-linux-gnuabi64\ 
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
