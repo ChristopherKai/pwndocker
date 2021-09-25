@@ -44,11 +44,14 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     pip3 uninstall pwntools -y &&\
     pip3  --no-cache-dir  install formatStringExploiter pwntools==4.7.0beta0
 
+
+
 # web misc tools
 RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && make install && cd -\
     && git clone https://github.com/brendan-rius/c-jwt-cracker.git && cd c-jwt-cracker && make \
-    && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit 
-    
+    && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
+    && git clone https://github.com/ReFirmLabs/binwalk.git && cd binwalk && python3 setup.py install \
+    && apt-get install squashfs-tools -y    
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
