@@ -30,6 +30,7 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     g++-mips64-linux-gnuabi64\ 
     # tools
     squashfs-tools\
+    binwalk\
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
@@ -53,8 +54,7 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
 RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && make install && cd -\
     && git clone https://github.com/brendan-rius/c-jwt-cracker.git && cd c-jwt-cracker && make \
     && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
-    && git clone https://github.com/ReFirmLabs/binwalk.git && cd binwalk && python3 setup.py install \
-    && 	curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
+    && curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
