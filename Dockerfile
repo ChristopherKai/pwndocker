@@ -23,11 +23,11 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     gcc-mips-linux-gnu \ 
     g++-mips-linux-gnu \
     # mips 64 bit little ending
-    gcc-mips64el-linux-gnuabi64\
-    g++-mips64el-linux-gnuabi64 \
-    # mips 64 bit big ending
-    gcc-mips64-linux-gnuabi64\
-    g++-mips64-linux-gnuabi64\ 
+    # gcc-mips64el-linux-gnuabi64\
+    # g++-mips64el-linux-gnuabi64 \
+    # # mips 64 bit big ending
+    # gcc-mips64-linux-gnuabi64\
+    # g++-mips64-linux-gnuabi64\ 
     # tools
     squashfs-tools\
     binwalk\
@@ -42,7 +42,7 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     printf "set context-code-lines 5\nset context-sections regs disasm code ghidra stack  expressions" >>/root/.gdbinit && \
     printf "\nexport LC_ALL=en_US.UTF-8\nexport PYTHONIOENCODING=UTF-8" >> /etc/profile &&\
     # coolpwn
-    git clone -b py3 https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python3 setup.py install && cd - &&\
+    # git clone -b py3 https://github.com/ChristopherKai/coolpwn.git && cd coolpwn && python3 setup.py install && cd - &&\
     # mytool
     git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate &&\
     pip3 uninstall pwntools -y &&\
