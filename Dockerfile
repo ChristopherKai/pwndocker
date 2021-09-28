@@ -46,7 +46,7 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     # mytool
     # git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate &&\
     pip3 uninstall pwntools -y &&\
-    pip3  --no-cache-dir  install pwntools==4.7.0beta0 
+    git clone https://github.com/Gallopsled/pwntools.git && cd pwntools && python3 setup.py install
     # formatStringExploiter
 
 
