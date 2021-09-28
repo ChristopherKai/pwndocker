@@ -34,8 +34,8 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     binwalk\
     #  ICS tools
     python-dev python-pip libncurses5-dev\
-    curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && python get-pip.py
-    && rm -rf /var/lib/apt/lists/*
+    curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && python get-pip.py &&\
+    rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
     echo "root:root" | chpasswd && chmod +x /opt/entrypoint.sh &&\
