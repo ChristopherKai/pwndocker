@@ -2,6 +2,7 @@ FROM skysider/pwndocker
 USER root
 COPY entrypoint.sh /opt
 WORKDIR /opt
+    # IOT 
 RUN  apt-get update && apt-get install -y qemu-user  \
     qemu-user-static\
     # for aarch64 with debug symbol
@@ -28,9 +29,12 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     # # mips 64 bit big ending
     # gcc-mips64-linux-gnuabi64\
     # g++-mips64-linux-gnuabi64\ 
-    # tools
+    # IOT tools
     squashfs-tools\
     binwalk\
+    #  ICS tools
+    python-dev python-pip libncurses5-dev\
+    curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && python get-pip.py
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
@@ -46,17 +50,20 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     # mytool
     # git clone https://github.com/ChristopherKai/mytools.git && ln /opt/mytools/gentemplate/gentemplate.py /usr/local/bin/gentemplate &&\
     pip3 uninstall pwntools -y &&\
-    git clone https://github.com/Gallopsled/pwntools.git && cd pwntools && python3 setup.py install
+    git clone https://github.com/Gallopsled/pwntools.git  --depth=1 && cd pwntools && python3 setup.py install
     # formatStringExploiter
 
 
 
 # web misc tools
-RUN git clone https://github.com/Rup0rt/pcapfix.git && cd pcapfix && make && make install && cd -\
-    && git clone https://github.com/brendan-rius/c-jwt-cracker.git && cd c-jwt-cracker && make \
-    && git clone https://github.com/offensive-security/exploit-database.git && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
+RUN git clone https://github.com/Rup0rt/pcapfix.git --depth=1 && cd pcapfix && make && make install && cd -\
+    && git clone https://github.com/brendan-rius/c-jwt-cracker.git  --depth=1 && cd c-jwt-cracker && make \
+    && git clone https://github.com/offensive-security/exploit-database.git  --depth=1 && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
     && curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall \
-    && apt autoremove -y
+    # ics tool
+    && git clone https://github.com/w3h/isf --depth=1&& cd isf && pip2 install -r requirements.txt \
+    && apt autoremove -y 
+
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
