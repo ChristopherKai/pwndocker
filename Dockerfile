@@ -33,7 +33,7 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     squashfs-tools\
     binwalk\
     #  ICS tools
-    python-dev python-pip libncurses5-dev\
+    python-dev python-pip libncurses5-dev &&\
     curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && python get-pip.py &&\
     rm -rf /var/lib/apt/lists/*
 
