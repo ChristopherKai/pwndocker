@@ -61,7 +61,7 @@ RUN git clone https://github.com/Rup0rt/pcapfix.git --depth=1 && cd pcapfix && m
     && git clone https://github.com/offensive-security/exploit-database.git  --depth=1 && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
     && curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall \
     # ics tool
-    && git clone https://github.com/w3h/isf --depth=1&& cd isf && pip2 install -r requirements.txt \
+    && git clone https://github.com/dark-lbp/isf.git --depth=1&& cd isf && pip2 install -r requirements.txt \
     && apt autoremove -y 
 
 
