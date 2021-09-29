@@ -24,18 +24,14 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     gcc-mips-linux-gnu \ 
     g++-mips-linux-gnu \
     # mips 64 bit little ending
-    # gcc-mips64el-linux-gnuabi64\
-    # g++-mips64el-linux-gnuabi64 \
+    gcc-mips64el-linux-gnuabi64\
+    g++-mips64el-linux-gnuabi64 \
     # # mips 64 bit big ending
-    # gcc-mips64-linux-gnuabi64\
-    # g++-mips64-linux-gnuabi64\ 
+    gcc-mips64-linux-gnuabi64\
+    g++-mips64-linux-gnuabi64\ 
     # IOT tools
     squashfs-tools\
-    binwalk\
-    #  ICS tools
-    python-dev libncurses5-dev &&\
-    curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && python get-pip.py &&\
-    rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
     echo "root:root" | chpasswd && chmod +x /opt/entrypoint.sh &&\
@@ -53,17 +49,10 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
     git clone https://github.com/Gallopsled/pwntools.git  --depth=1 && cd pwntools && python3 setup.py install
     # formatStringExploiter
 
-
-
 # web misc tools
 RUN git clone https://github.com/Rup0rt/pcapfix.git --depth=1 && cd pcapfix && make && make install && cd -\
-    && git clone https://github.com/brendan-rius/c-jwt-cracker.git  --depth=1 && cd c-jwt-cracker && make \
-    && git clone https://github.com/offensive-security/exploit-database.git  --depth=1 && ln -sf /opt/exploit-database/searchsploit /usr/local/bin/searchsploit \ 
-    && curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall \
-    # ics tool
-    && git clone https://github.com/dark-lbp/isf.git --depth=1&& cd isf && pip2 install -r requirements.txt \
-    && apt autoremove -y 
-
+    && git clone https://github.com/brendan-rius/c-jwt-cracker.git  --depth=1 && cd c-jwt-cracker && make && cd - \
+    && git clone https://github.com/ReFirmLabs/binwalk.git --depth=1 &&  cd binwalk &&  python3 setup.py install
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
