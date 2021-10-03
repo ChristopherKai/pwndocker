@@ -32,7 +32,7 @@ RUN  apt-get update && apt-get install -y qemu-user  \
     # IOT tools
     squashfs-tools\
     zlib1g-dev liblzma-dev liblzo2-dev\
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config && \
     echo "root:root" | chpasswd && chmod +x /opt/entrypoint.sh &&\
@@ -53,8 +53,9 @@ RUN sed -i "s|#PermitRootLogin yes|PermitRootLogin yes|g"  /etc/ssh/sshd_config 
 # web misc tools
 RUN git clone https://github.com/Rup0rt/pcapfix.git --depth=1 && cd pcapfix && make && make install && cd -\
     && git clone https://github.com/brendan-rius/c-jwt-cracker.git  --depth=1 && cd c-jwt-cracker && make && cd - \
+    # IOC
     && git clone https://github.com/ReFirmLabs/binwalk.git --depth=1 &&  cd binwalk &&  python3 setup.py install && cd -\
-    && git clone https://github.com/devttys0/sasquatch && cd sasquatch && ./build.sh
+    && git clone https://github.com/devttys0/sasquatch && cd sasquatch && ./build.sh && cd - 
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
