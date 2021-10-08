@@ -55,7 +55,9 @@ RUN git clone https://github.com/Rup0rt/pcapfix.git --depth=1 && cd pcapfix && m
     && git clone https://github.com/brendan-rius/c-jwt-cracker.git  --depth=1 && cd c-jwt-cracker && make && cd - \
     # IOC
     && git clone https://github.com/ReFirmLabs/binwalk.git --depth=1 &&  cd binwalk &&  python3 setup.py install && cd -\
-    && git clone https://github.com/devttys0/sasquatch && cd sasquatch && ./build.sh && cd - 
+    && git clone https://github.com/devttys0/sasquatch && cd sasquatch && ./build.sh && cd - \
+    # crypto
+    && pip3 install pycryptodome 
 
 EXPOSE 22
 ENTRYPOINT [ "/opt/entrypoint.sh" ]
